@@ -3,9 +3,6 @@
 
 #### Goal: Build a web-based tool that lets users write their own graph algorithm code (Python) and visualize execution step-by-step through an interactive graph display.
 
-#### Timeline: 2 weeks
-#### Target: Resume project for Big N applications (1-2 years experience)
-
 #### Core Value Proposition
 * What makes this different from existing visualizers: - Users write their own code (any style: recursion/iterative, adj list/matrix, etc.) - Minimal instrumentation (2-3 function calls) instead of rigid API - Generic event model supports any graph algorithm (BFS, DFS, Dijkstra, topo, even obscure ones) - Interactive graph with drag/pan/zoom + timeline replay controls
 
