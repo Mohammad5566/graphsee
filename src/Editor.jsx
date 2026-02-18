@@ -15,8 +15,8 @@ export default function EditorComponent() {
 
   return (
     <Editor
-      width="50%"
-      height="50%"
+      width="100%"
+      height="100%"
       language="python"
       theme="vs-dark"
       value={code}
@@ -24,7 +24,8 @@ export default function EditorComponent() {
       onChange={handleEditorChange}
       onMount={handleEditorMount}
       options={{
-        selectOnLineNumbers: true
+        selectOnLineNumbers: true,
+        fontSize: 18
       }}
     />
   );

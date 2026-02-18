@@ -3,11 +3,15 @@ import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/
 import '@xyflow/react/dist/style.css';
 import Editor from './Editor';
  
-const initialNodes = [
-  { id: 'n1', width: 50, height: 20, position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
-  { id: 'n2', width: 50, height: 20, position: { x: 0, y: 100 }, data: { label: 'Node 2' }, animated: true },
-];
-const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
+const initialNodes = [];
+for (let i = 0; i < 5; i += 1) {
+  var newNode = { id: 'n' + i, width: 50, height: 20, position: { x: 0, y: i * 100 }, data: { label: 'Node ' + i } }
+  initialNodes.push(newNode); 
+}
+const initialEdges = [];
+for (let i = 0; i < 4; i += 1) {
+  initialEdges.push({ id: 'n' + i + '-n' + (i + 1), source: 'n' + i, target: 'n' + (i + 1) });
+}
  
 export default function App() {
   const [nodes, setNodes] = useState(initialNodes);
@@ -21,22 +25,21 @@ export default function App() {
     (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
     [],
   );
-  const onConnect = useCallback(
-    (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
-    [],
-  );
  
   return (
-    <div style={{ width: '50vw', height: '100vh' }}>
-      <Editor></Editor>
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        fitView
-      />
+    <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+      <div style={{ width: '50%', height: '100%' }}>
+        <Editor></Editor>
+      </div>
+      <div style={{ width: '50%', height: '100%' }}>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          fitView
+        />
+      </div>
     </div>
   );
 }
