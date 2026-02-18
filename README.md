@@ -9,6 +9,8 @@
 #### Core Value Proposition
 * What makes this different from existing visualizers: - Users write their own code (any style: recursion/iterative, adj list/matrix, etc.) - Minimal instrumentation (2-3 function calls) instead of rigid API - Generic event model supports any graph algorithm (BFS, DFS, Dijkstra, topo, even obscure ones) - Interactive graph with drag/pan/zoom + timeline replay controls
 
+---
+
 #### Tech Stack
 ##### Frontend
 * React + TypeScript + Vite (fast dev setup)
@@ -20,6 +22,8 @@
 * viz.py - Python module with 2-3 instrumentation functions
 * Replay engine (TypeScript) - consumes trace events and drives visualization
 * Vitest/Jest - tests for replay logic
+
+--- 
 
 #### Architecture Overview
 ```
