@@ -1,14 +1,14 @@
 import { useState, useCallback } from 'react';
-import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react';
+import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge, Node, Edge } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import Editor from './Editor';
+import Editor from './Editor.tsx';
  
-const initialNodes = [];
+const initialNodes: Node[] = [];
 for (let i = 0; i < 5; i += 1) {
   var newNode = { id: 'n' + i, width: 50, height: 20, position: { x: 0, y: i * 100 }, data: { label: 'Node ' + i } }
   initialNodes.push(newNode); 
 }
-const initialEdges = [];
+const initialEdges: Edge[] = [];
 for (let i = 0; i < 4; i += 1) {
   initialEdges.push({ id: 'n' + i + '-n' + (i + 1), source: 'n' + i, target: 'n' + (i + 1) });
 }
@@ -18,11 +18,11 @@ export default function App() {
   const [edges, setEdges] = useState(initialEdges);
  
   const onNodesChange = useCallback(
-    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    (changes: any) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
     [],
   );
   const onEdgesChange = useCallback(
-    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    (changes: any) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
     [],
   );
  

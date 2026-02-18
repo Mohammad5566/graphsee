@@ -4,11 +4,11 @@ import Editor from '@monaco-editor/react';
 export default function EditorComponent() {
   const [code, setCode] = useState('// type your code...');
 
-  const handleEditorChange = (value) => {
-    setCode(value);
+  const handleEditorChange = (value: string | undefined) => {
+    setCode(value ?? '');
   };
 
-  const handleEditorMount = (editor) => {
+  const handleEditorMount = (editor:any) => {
     console.log('editorDidMount', editor);
     editor.focus();
   };
