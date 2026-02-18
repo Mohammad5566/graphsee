@@ -1,10 +1,11 @@
 import { useState, useCallback } from 'react';
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, addEdge } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import Editor from './Editor';
  
 const initialNodes = [
   { id: 'n1', width: 50, height: 20, position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
-  { id: 'n2', width: 50, height: 20, position: { x: 0, y: 100 }, data: { label: 'Node 2' } },
+  { id: 'n2', width: 50, height: 20, position: { x: 0, y: 100 }, data: { label: 'Node 2' }, animated: true },
 ];
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
  
@@ -27,6 +28,7 @@ export default function App() {
  
   return (
     <div style={{ width: '50vw', height: '100vh' }}>
+      <Editor></Editor>
       <ReactFlow
         nodes={nodes}
         edges={edges}
