@@ -94,6 +94,7 @@ export default function App() {
             edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
+            colorMode={isDark ? 'dark' : 'light'}
             fitView
           />
         </div>

@@ -17,6 +17,10 @@
   --graph-bg: #1e1e2e;
   --toggle-bg: #45475a;
   --toggle-fg: #f9e2af;
+  --node-bg: #313244;
+  --node-border: #585b70;
+  --node-text: #cdd6f4;
+  --edge-stroke: #a6adc8;
 }
 
 .app.light {
@@ -37,6 +41,10 @@
   --graph-bg: #eff1f5;
   --toggle-bg: #ccd0da;
   --toggle-fg: #df8e1d;
+  --node-bg: #ffffff;
+  --node-border: #ccd0da;
+  --node-text: #4c4f69;
+  --edge-stroke: #6c6f85;
 }
 
 /* ── Layout ── */
@@ -230,5 +238,63 @@
 
 .replay-buttons button:hover {
   background: var(--bg-btn-secondary-hover);
+}
+
+/* ── ReactFlow dark/light overrides ── */
+.right-panel .react-flow__node {
+  background: var(--node-bg);
+  border: 2px solid var(--node-border);
+  border-radius: 8px;
+  color: var(--node-text);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.right-panel .react-flow__node.selected {
+  border-color: var(--slider-thumb);
+  box-shadow: 0 0 0 3px rgba(137, 180, 250, 0.3);
+}
+
+.right-panel .react-flow__edge-path {
+  stroke: var(--edge-stroke);
+  stroke-width: 2;
+  transition: stroke 0.3s;
+}
+
+.right-panel .react-flow__edge.selected .react-flow__edge-path {
+  stroke: var(--slider-thumb);
+}
+
+.right-panel .react-flow__handle {
+  background: var(--edge-stroke);
+  border: 2px solid var(--node-bg);
+  width: 8px;
+  height: 8px;
+}
+
+.right-panel .react-flow__background {
+  background: var(--graph-bg);
+}
+
+.right-panel .react-flow__minimap {
+  background: var(--bg-panel);
+}
+
+.right-panel .react-flow__controls button {
+  background: var(--bg-btn-secondary);
+  color: var(--text-primary);
+  border: none;
+  border-bottom: 1px solid var(--border);
+}
+
+.right-panel .react-flow__controls button:hover {
+  background: var(--bg-btn-secondary-hover);
+}
+
+.right-panel .react-flow__controls button svg {
+  fill: var(--text-primary);
 }
 
