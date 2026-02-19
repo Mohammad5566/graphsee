@@ -34,6 +34,7 @@ export default function App() {
   const [totalSteps] = useState(12);
   const [isPlaying, setIsPlaying] = useState(false);
   const [visited, setVisited] = useState<string[]>([]);
+  const [isDark, setIsDark] = useState(true);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -57,13 +58,16 @@ export default function App() {
   const handleSeek = (s: number) => setStep(s);
 
   return (
-    <div className="app">
+    <div className={`app${isDark ? '' : ' light'}`}>
       {/* ── Top toolbar ── */}
       <div className="toolbar">
         <button className="btn-run" onClick={handleRun}>▶ Run Algorithm</button>
         <button className="btn-secondary" onClick={handleStepBack}>◀ Step Back</button>
         <button className="btn-secondary" onClick={handleStepForward}>Step Forward ▶▶</button>
         <button className="btn-secondary" onClick={handleReset}>↻ Reset</button>
+        <button className="btn-theme-toggle" onClick={() => setIsDark((d) => !d)} title="Toggle theme">
+          {isDark ? '☀️' : '🌙'}
+        </button>
       </div>
 
       {/* ── Main content ── */}
@@ -71,7 +75,7 @@ export default function App() {
         {/* Left: code editor + variables */}
         <div className="left-panel">
           <div className="editor-wrapper">
-            <Editor />
+            <Editor isDark={isDark} />
           </div>
           <div className="variables-panel">
             <h3>Variables:</h3>

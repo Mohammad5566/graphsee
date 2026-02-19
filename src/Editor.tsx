@@ -11,9 +11,10 @@ const DEFAULT_CODE = `def dfs(node, visited):
 
 interface EditorComponentProps {
   onCodeChange?: (code: string) => void;
+  isDark?: boolean;
 }
 
-export default function EditorComponent({ onCodeChange }: EditorComponentProps) {
+export default function EditorComponent({ onCodeChange, isDark = true }: EditorComponentProps) {
   const [code, setCode] = useState(DEFAULT_CODE);
 
   const handleEditorChange = (value: string | undefined) => {
@@ -31,7 +32,7 @@ export default function EditorComponent({ onCodeChange }: EditorComponentProps) 
       width="100%"
       height="100%"
       language="python"
-      theme="vs-dark"
+      theme={isDark ? 'vs-dark' : 'light'}
       value={code}
       onChange={handleEditorChange}
       onMount={handleEditorMount}
