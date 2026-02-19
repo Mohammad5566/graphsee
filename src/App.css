@@ -1,3 +1,44 @@
+/* ── Theme variables ── */
+.app {
+  --bg-app: #1e1e2e;
+  --bg-toolbar: #313244;
+  --bg-panel: #181825;
+  --bg-btn-secondary: #45475a;
+  --bg-btn-secondary-hover: #585b70;
+  --border: #45475a;
+  --text-primary: #cdd6f4;
+  --text-muted: #a6adc8;
+  --text-accent: #fab387;
+  --btn-run-bg: #a6e3a1;
+  --btn-run-bg-hover: #94e098;
+  --btn-run-text: #1e1e2e;
+  --slider-track: #45475a;
+  --slider-thumb: #89b4fa;
+  --graph-bg: #1e1e2e;
+  --toggle-bg: #45475a;
+  --toggle-fg: #f9e2af;
+}
+
+.app.light {
+  --bg-app: #eff1f5;
+  --bg-toolbar: #dce0e8;
+  --bg-panel: #e6e9ef;
+  --bg-btn-secondary: #ccd0da;
+  --bg-btn-secondary-hover: #bcc0cc;
+  --border: #ccd0da;
+  --text-primary: #4c4f69;
+  --text-muted: #6c6f85;
+  --text-accent: #e64553;
+  --btn-run-bg: #40a02b;
+  --btn-run-bg-hover: #369922;
+  --btn-run-text: #ffffff;
+  --slider-track: #ccd0da;
+  --slider-thumb: #1e66f5;
+  --graph-bg: #eff1f5;
+  --toggle-bg: #ccd0da;
+  --toggle-fg: #df8e1d;
+}
+
 /* ── Layout ── */
 .app {
   display: flex;
@@ -5,8 +46,9 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: #1e1e2e;
-  color: #cdd6f4;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
 }
 
 /* ── Top toolbar ── */
@@ -15,8 +57,8 @@
   align-items: center;
   gap: 10px;
   padding: 8px 16px;
-  background: #313244;
-  border-bottom: 1px solid #45475a;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }
 
@@ -34,28 +76,45 @@
 }
 
 .btn-run {
-  background: #a6e3a1;
-  color: #1e1e2e;
+  background: var(--btn-run-bg);
+  color: var(--btn-run-text);
 }
 .btn-run:hover {
-  background: #94e098;
+  background: var(--btn-run-bg-hover);
 }
 
 .btn-secondary {
-  background: #45475a;
-  color: #cdd6f4;
+  background: var(--bg-btn-secondary);
+  color: var(--text-primary);
 }
 .btn-secondary:hover {
-  background: #585b70;
+  background: var(--bg-btn-secondary-hover);
 }
 
 .btn-share {
   margin-left: auto;
-  background: #89b4fa;
-  color: #1e1e2e;
+  background: var(--slider-thumb);
+  color: var(--btn-run-text);
 }
 .btn-share:hover {
-  background: #74a8f7;
+  opacity: 0.85;
+}
+
+/* ── Theme toggle ── */
+.btn-theme-toggle {
+  margin-left: auto;
+  background: var(--toggle-bg);
+  color: var(--toggle-fg);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  line-height: 1;
+}
+.btn-theme-toggle:hover {
+  background: var(--bg-btn-secondary-hover);
 }
 
 /* ── Main content area ── */
@@ -70,7 +129,7 @@
   width: 45%;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #45475a;
+  border-right: 1px solid var(--border);
 }
 
 .editor-wrapper {
@@ -80,13 +139,14 @@
 
 .variables-panel {
   padding: 12px 16px;
-  background: #181825;
-  border-top: 1px solid #45475a;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border);
   font-family: 'JetBrains Mono', 'Fira Code', monospace;
   font-size: 14px;
   min-height: 80px;
   max-height: 120px;
   overflow-y: auto;
+  transition: background 0.3s;
 }
 
 .variables-panel h3 {
@@ -95,17 +155,18 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #a6adc8;
+  color: var(--text-muted);
 }
 
 .variables-panel .var-value {
-  color: #fab387;
+  color: var(--text-accent);
 }
 
 /* ── Right panel: graph ── */
 .right-panel {
   flex: 1;
-  background: #1e1e2e;
+  background: var(--graph-bg);
+  transition: background 0.3s;
 }
 
 /* ── Bottom replay controls ── */
@@ -113,16 +174,17 @@
   display: flex;
   flex-direction: column;
   padding: 10px 20px 14px;
-  background: #313244;
-  border-top: 1px solid #45475a;
+  background: var(--bg-toolbar);
+  border-top: 1px solid var(--border);
   flex-shrink: 0;
+  transition: background 0.3s;
 }
 
 .step-info {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 6px;
-  color: #cdd6f4;
+  color: var(--text-primary);
 }
 
 .progress-slider {
@@ -130,7 +192,7 @@
   height: 6px;
   -webkit-appearance: none;
   appearance: none;
-  background: #45475a;
+  background: var(--slider-track);
   border-radius: 3px;
   outline: none;
   margin-bottom: 10px;
@@ -143,7 +205,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #89b4fa;
+  background: var(--slider-thumb);
   cursor: pointer;
 }
 
@@ -155,8 +217,8 @@
 }
 
 .replay-buttons button {
-  background: #45475a;
-  color: #cdd6f4;
+  background: var(--bg-btn-secondary);
+  color: var(--text-primary);
   border: none;
   border-radius: 6px;
   padding: 8px 14px;
@@ -167,6 +229,6 @@
 }
 
 .replay-buttons button:hover {
-  background: #585b70;
+  background: var(--bg-btn-secondary-hover);
 }
 
