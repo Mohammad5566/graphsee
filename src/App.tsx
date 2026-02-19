@@ -5,6 +5,7 @@ import './App.css';
 import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
 import Editor from './components/Editor.tsx';
 import Controls from './components/Controls.tsx';
+import GraphView from './components/GraphView.tsx';
 
 const initialNodes: Node[] = [
   { id: '1', position: { x: 0, y: 150 },   data: { label: '1' } },
@@ -89,16 +90,13 @@ export default function App() {
         </div>
 
         {/* Right: graph visualizer */}
-        <div className="right-panel">
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            colorMode={isDark ? 'dark' : 'light'}
-            fitView
-          />
-        </div>
+        <GraphView
+          isDark={isDark}
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+        />
       </div>
 
       {/* ── Bottom replay controls ── */}

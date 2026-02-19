@@ -1,8 +1,8 @@
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, Node, Edge } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
-import './App.css';
 
 interface GraphViewProps {
+  isDark?: boolean;
   nodes: Node[];
   edges: Edge[];
   onNodesChange?: (changes: any) => void;
@@ -10,30 +10,12 @@ interface GraphViewProps {
 }
 
 export default function GraphView({ 
+  isDark,
   nodes, 
   edges, 
   onNodesChange, 
   onEdgesChange 
 }: GraphViewProps) {
-
-  const [nodes, setNodes] = useState(nodes);
-  const [edges, setEdges] = useState(edges);
-  const [isDark, setIsDark] = useState(true);
-
-  const onNodesChange = useCallback(
-    (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [],
-  );
-  const onEdgesChange = useCallback(
-    (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [],
-  );
-
-  const handleRun = () => {
-    setStep(0);
-    setVisited([]);
-    // TODO: execute algorithm and collect events
-  };
 
   return (
     // graph visualizer
