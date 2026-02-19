@@ -2,7 +2,8 @@ import { useState, useCallback } from 'react';
 import { ReactFlow, applyNodeChanges, applyEdgeChanges, Node, Edge } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import './App.css';
-import Editor from './Editor.tsx';
+import { BsFillMoonStarsFill, BsFillSunFill } from 'react-icons/bs';
+import Editor from './components/Editor.tsx';
 import Controls from './components/Controls.tsx';
 
 const initialNodes: Node[] = [
@@ -66,7 +67,7 @@ export default function App() {
         <button className="btn-secondary" onClick={handleStepForward}>Step Forward ▶▶</button>
         <button className="btn-secondary" onClick={handleReset}>↻ Reset</button>
         <button className="btn-theme-toggle" onClick={() => setIsDark((d) => !d)} title="Toggle theme">
-          {isDark ? '☀️' : '🌙'}
+          {isDark ? <BsFillSunFill color="white" /> : <BsFillMoonStarsFill color="navy"/>}
         </button>
       </div>
 

@@ -5,16 +5,19 @@ import './App.css';
 interface GraphViewProps {
   nodes: Node[];
   edges: Edge[];
+  onNodesChange?: (changes: any) => void;
+  onEdgesChange?: (changes: any) => void;
 }
 
-export default function GraphView({ nodes, edges }: GraphViewProps) {
+export default function GraphView({ 
+  nodes, 
+  edges, 
+  onNodesChange, 
+  onEdgesChange 
+}: GraphViewProps) {
 
   const [nodes, setNodes] = useState(nodes);
   const [edges, setEdges] = useState(edges);
-  const [step, setStep] = useState(0);
-  const [totalSteps] = useState(12);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [visited, setVisited] = useState<string[]>([]);
   const [isDark, setIsDark] = useState(true);
 
   const onNodesChange = useCallback(
