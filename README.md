@@ -1,16 +1,52 @@
-# React + Vite
+# graphsee
+## Graph Algorithm Visualizer - Project Plan
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+#### Goal: Build a web-based tool that lets users write their own graph algorithm code (Python) and visualize execution step-by-step through an interactive graph display.
 
-Currently, two official plugins are available:
+#### Core Value Proposition
+* What makes this different from existing visualizers: - Users write their own code (any style: recursion/iterative, adj list/matrix, etc.) - Minimal instrumentation (2-3 function calls) instead of rigid API - Generic event model supports any graph algorithm (BFS, DFS, Dijkstra, topo, even obscure ones) - Interactive graph with drag/pan/zoom + timeline replay controls
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+#### Tech Stack
+##### Frontend
+* React + TypeScript + Vite (fast dev setup)
+* React Flow (reactflow) - interactive node/edge visualization with drag/pan/zoom
+* Monaco Editor (@monaco-editor/react) - VS Code-quality code editor in browser
+* Pyodide - run Python in browser via WebAssembly (no backend needed for v1)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+#### Backend
+* viz.py - Python module with 2-3 instrumentation functions
+* Replay engine (TypeScript) - consumes trace events and drives visualization
+* Vitest/Jest - tests for replay logic
 
-## Expanding the ESLint configuration
+--- 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+#### Architecture Overview
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Web App (React)                      │
+│                                                         │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
+│  │ Monaco Editor│  │  React Flow  │  │   Controls   │   │
+│  │  (code input)│  │  (graph viz) │  │ (step/play)  │   │
+│  └──────────────┘  └──────────────┘  └──────────────┘   │
+│         │                  ▲                  │         │
+│         │                  │                  │         │
+│         ▼                  │                  ▼         │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │          Replay Engine (TypeScript)              │   │ 
+│  │   - consumes trace events                        │   │
+│  │   - updates node/edge styles per step            │   │
+│  └──────────────────────────────────────────────────┘   │
+│                           ▲                             │
+│                           │                             │
+│                           │ event list in JSO           │
+│                           │                             │
+│  ┌──────────────────────────────────────────────────┐   │
+│  │         Pyodide (Python in Browser)              │   │
+│  │   - executes user code                           │   │
+│  │   - viz.py emits events to JS                    │   │
+│  └──────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+```
