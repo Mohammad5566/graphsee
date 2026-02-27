@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import Editor from '@monaco-editor/react';
+import { useState } from "react";
+import Editor from "@monaco-editor/react";
 
 const DEFAULT_CODE = `def dfs(node, visited):
     if not node: return
@@ -14,11 +14,14 @@ interface EditorComponentProps {
   isDark?: boolean;
 }
 
-export default function EditorComponent({ onCodeChange, isDark = true }: EditorComponentProps) {
+export default function EditorComponent({
+  onCodeChange,
+  isDark = true,
+}: EditorComponentProps) {
   const [code, setCode] = useState(DEFAULT_CODE);
 
   const handleEditorChange = (value: string | undefined) => {
-    const newCode = value ?? '';
+    const newCode = value ?? "";
     setCode(newCode);
     onCodeChange?.(newCode);
   };
@@ -32,7 +35,7 @@ export default function EditorComponent({ onCodeChange, isDark = true }: EditorC
       width="100%"
       height="100%"
       language="python"
-      theme={isDark ? 'vs-dark' : 'light'}
+      theme={isDark ? "vs-dark" : "light"}
       value={code}
       onChange={handleEditorChange}
       onMount={handleEditorMount}
@@ -41,7 +44,7 @@ export default function EditorComponent({ onCodeChange, isDark = true }: EditorC
         fontSize: 16,
         minimap: { enabled: false },
         scrollBeyondLastLine: false,
-        lineNumbers: 'on',
+        lineNumbers: "on",
         padding: { top: 12 },
       }}
     />
