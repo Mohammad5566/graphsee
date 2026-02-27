@@ -6,7 +6,7 @@ import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
 import Editor from "./components/Editor.tsx";
 import Controls from "./components/Controls.tsx";
 import GraphView from "./components/GraphView.tsx";
-import { generateGraph } from "./data/graphGenerator.ts";
+import { generateGraph } from "./util/graphGenerator.ts";
 
 const initialNodes = generateGraph.nodes;
 const initialEdges = generateGraph.edges;
