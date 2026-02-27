@@ -7,6 +7,7 @@ import Editor from "./components/Editor.tsx";
 import Controls from "./components/Controls.tsx";
 import GraphView from "./components/GraphView.tsx";
 import { generateGraph } from "./util/graphGenerator.ts";
+import { sampleEvents } from "./util/sampleEvents.ts";
 
 const initialNodes = generateGraph.nodes;
 const initialEdges = generateGraph.edges;
@@ -97,6 +98,7 @@ export default function App() {
           isDark={isDark}
           nodes={nodes}
           edges={edges}
+          sampleEvents={sampleEvents}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
         />

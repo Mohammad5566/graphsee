@@ -1,5 +1,6 @@
 // circle node component for react flow graph nodes
 import { Handle, Position } from "@xyflow/react";
+import { useCallback } from "react";
 
 export default function CircleNode({ data }: any) {
   return (
@@ -19,18 +20,16 @@ export default function CircleNode({ data }: any) {
       }}
     >
       {data.label}
-      <Handle type="target" position={Position.Top} style={{ opacity: 0 }} />
       <Handle
         type="target"
         position={Position.Left}
-        id="target-left"
+        id="target-right"
         style={{ opacity: 0 }}
       />
-      <Handle type="source" position={Position.Bottom} style={{ opacity: 0 }} />
       <Handle
         type="source"
         position={Position.Right}
-        id="source-right"
+        id="source-left"
         style={{ opacity: 0 }}
       />
     </div>
