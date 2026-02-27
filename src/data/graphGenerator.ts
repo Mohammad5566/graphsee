@@ -64,11 +64,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
   {
@@ -79,11 +74,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
   {
@@ -94,11 +84,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
   {
@@ -109,11 +94,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
   {
@@ -124,11 +104,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
   {
@@ -139,11 +114,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
   {
@@ -154,11 +124,6 @@ const edges: Edge[] = [
       type: MarkerType.ArrowClosed,
       width: 15,
       height: 15,
-      color: "#e8e8e8ff",
-    },
-    style: {
-      strokeWidth: 2,
-      stroke: "#e8e8e8ff",
     },
   },
 ];

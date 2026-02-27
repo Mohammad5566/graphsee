@@ -18,7 +18,7 @@
   --toggle-bg: #45475a;
   --toggle-fg: #f9e2af;
   --node-bg: #313244;
-  --node-border: #585b70;
+  --node-border: #b9bbc1;
   --node-text: #cdd6f4;
   --edge-stroke: #a6adc8;
 }
@@ -42,7 +42,7 @@
   --toggle-bg: #ccd0da;
   --toggle-fg: #df8e1d;
   --node-bg: #ffffff;
-  --node-border: #ccd0da;
+  --node-border: #747579;
   --node-text: #4c4f69;
   --edge-stroke: #6c6f85;
 }
@@ -243,6 +243,12 @@
 }
 
 /* ── ReactFlow dark/light overrides ── */
+.react-flow__edge-marker {
+  fill: #1515de; /* Default marker color */
+}
+.dark .react-flow__edge .react-flow__edge-marker {
+  fill: #781616; /* Dark mode marker color */
+}
 .right-panel .react-flow__node {
   background: transparent;
   border: none;
