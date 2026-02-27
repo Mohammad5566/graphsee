@@ -1,6 +1,7 @@
 // exports a function that generates a random graph with a specified number of nodes and edges
 // two types of graphs are supported: Edge List (primary), Adjacency List (secondary)
 import { Edge, Node } from "@xyflow/react";
+import CircleNode from "../components/CircleNode";
 
 export interface Graph {
   nodes: Node[];
@@ -14,12 +15,17 @@ const nodes: Node[] = [
   { id: "4", position: { x: 120, y: 250 }, data: { label: "4" } },
   { id: "5", position: { x: 250, y: 280 }, data: { label: "5" } },
   { id: "6", position: { x: 380, y: 50 }, data: { label: "6" } },
-  { id: "7", position: { x: 380, y: 200 }, data: { label: "7" } },
+  {
+    id: "7",
+    type: "circle",
+    position: { x: 380, y: 200 },
+    data: { label: "7" },
+  },
   {
     id: "8",
+    type: "circle",
     position: { x: 500, y: 200 },
-    type: "shape",
-    data: { type: "circle", label: "8" },
+    data: { label: "8" },
   },
 ];
 
