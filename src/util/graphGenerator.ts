@@ -1,8 +1,6 @@
 // exports a function that generates a random graph with a specified number of nodes and edges
 // two types of graphs are supported: Edge List (primary), Adjacency List (secondary)
-import { Edge, Node } from "@xyflow/react";
-import CircleNode from "../components/CircleNode";
-import { MarkerType } from "@xyflow/react";
+import { Edge, Node, MarkerType } from "@xyflow/react";
 
 export interface Graph {
   nodes: Node[];
@@ -67,8 +65,8 @@ const edges: Edge[] = [
     },
   },
   {
-    id: "e1-4",
-    source: "1",
+    id: "e2-4",
+    source: "2",
     target: "4",
     markerEnd: {
       type: MarkerType.ArrowClosed,

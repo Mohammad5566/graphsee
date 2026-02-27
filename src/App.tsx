@@ -1,11 +1,5 @@
 import { useState, useCallback } from "react";
-import {
-  ReactFlow,
-  applyNodeChanges,
-  applyEdgeChanges,
-  Node,
-  Edge,
-} from "@xyflow/react";
+import { applyNodeChanges, applyEdgeChanges } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import "./App.css";
 import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
