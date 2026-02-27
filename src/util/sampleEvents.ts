@@ -1,10 +1,10 @@
 // sample events for testing purposes
-export type Event = {
+export interface Event {
   node: number;
   state: "visited" | "visiting";
   timestamp: number;
   edge?: { from: number; to: number }; // traversing edge from -> to
-};
+}
 
 export const sampleEvents: Event[] = [
   { state: "visiting", node: 1, timestamp: 0 },
