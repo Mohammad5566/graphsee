@@ -10,14 +10,14 @@
 
 #### Tech Stack
 ##### Frontend
-* React + TypeScript + Vite (fast dev setup)
-* React Flow (reactflow) - interactive node/edge visualization with drag/pan/zoom
-* Monaco Editor (@monaco-editor/react) - VS Code-quality code editor in browser
-* Pyodide - run Python in browser via WebAssembly (no backend needed for v1)
+* React + TypeScript + Vite
+* React Flow - interactive node/edge visualization with drag/pan/zoom
+* Monaco Editor - VS Code-quality code editor in browser
+* Pyodide - run Python in browser (maybe use backend instead)
 
 #### Backend
 * viz.py - Python module with 2-3 instrumentation functions
-* Replay engine (TypeScript) - consumes trace events and drives visualization
+* Replay engine - consumes trace events and drives visualization
 * Vitest/Jest - tests for replay logic
 
 --- 
@@ -35,7 +35,7 @@
 │         │                  │                  │         │
 │         ▼                  │                  ▼         │
 │  ┌──────────────────────────────────────────────────┐   │
-│  │          Replay Engine (TypeScript)              │   │ 
+│  │                   Replay Engine                  │   │ 
 │  │   - consumes trace events                        │   │
 │  │   - updates node/edge styles per step            │   │
 │  └──────────────────────────────────────────────────┘   │
