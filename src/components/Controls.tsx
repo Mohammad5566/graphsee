@@ -1,3 +1,8 @@
+import {
+  BsFastForwardFill,
+  BsFillRewindFill,
+  BsArrowCounterclockwise,
+} from "react-icons/bs";
 interface ControlsProps {
   step: number;
   totalSteps: number;
@@ -34,16 +39,24 @@ export default function Controls({
         value={step}
         onChange={(e) => onSeek(Number(e.target.value))}
       />
-      <div className="replay-buttons">
-        <button onClick={onReset} title="Reset">⏮</button>
-        <button onClick={onStepBack} title="Step Back">⏪</button>
-        <button onClick={onPlayPause} title={isPlaying ? 'Pause' : 'Play'}>
-          {isPlaying ? '⏸' : '▶'}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        className="toolbar"
+      >
+        <button className="btn-secondary" onClick={onStepBack}>
+          <BsFillRewindFill /> Step Back
         </button>
-        <button onClick={onStepForward} title="Step Forward">⏩</button>
-        <button onClick={() => onSeek(totalSteps)} title="Go to End">⏭</button>
+        <button className="btn-secondary" onClick={onStepForward}>
+          Step Forward <BsFastForwardFill />
+        </button>
+        <button className="btn-secondary" onClick={onReset}>
+          <BsArrowCounterclockwise /> Reset
+        </button>
       </div>
     </div>
   );
 }
-

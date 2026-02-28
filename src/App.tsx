@@ -5,6 +5,7 @@ import "./App.css";
 import {
   BsFillMoonStarsFill,
   BsFillSunFill,
+  BsFillPlayFill,
   BsFastForwardFill,
   BsFillRewindFill,
   BsArrowCounterclockwise,
@@ -70,16 +71,7 @@ export default function App() {
       {/* ── Top toolbar ── */}
       <div className="toolbar">
         <button className="btn-run" onClick={handleRun}>
-          ▶ Run Algorithm
-        </button>
-        <button className="btn-secondary" onClick={handleStepBack}>
-          <BsFillRewindFill /> Step Back
-        </button>
-        <button className="btn-secondary" onClick={handleStepForward}>
-          Step Forward <BsFastForwardFill />
-        </button>
-        <button className="btn-secondary" onClick={handleReset}>
-          <BsArrowCounterclockwise /> Reset
+          Run Algorithm <BsFillPlayFill />
         </button>
         <button
           className="btn-theme-toggle"
@@ -129,8 +121,8 @@ export default function App() {
         totalSteps={totalSteps}
         isPlaying={isPlaying}
         onRun={handleRun}
-        onStepBack={handleStepBack}
-        onStepForward={handleStepForward}
+        onStepBack={handleRun}
+        onStepForward={handleRun}
         onReset={handleReset}
         onPlayPause={handlePlayPause}
         onSeek={handleSeek}
