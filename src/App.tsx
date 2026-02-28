@@ -2,7 +2,13 @@ import { useState, useCallback } from "react";
 import { applyNodeChanges, applyEdgeChanges } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import "./App.css";
-import { BsFillMoonStarsFill, BsFillSunFill } from "react-icons/bs";
+import {
+  BsFillMoonStarsFill,
+  BsFillSunFill,
+  BsFastForwardFill,
+  BsFillRewindFill,
+  BsArrowCounterclockwise,
+} from "react-icons/bs";
 import Editor from "./components/Editor.tsx";
 import Controls from "./components/Controls.tsx";
 import GraphView from "./components/GraphView.tsx";
@@ -20,6 +26,7 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [visited, setVisited] = useState<string[]>([]);
   const [isDark, setIsDark] = useState(true);
+  const [curEventIndex, setCurEventIndex] = useState(0);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -34,6 +41,18 @@ export default function App() {
     setStep(0);
     setVisited([]);
     // TODO: execute algorithm and collect events
+    const curEvent = sampleEvents[curEventIndex];
+    // update nodes/edges based on event
+    if (curEvent.state === "visiting") {
+      console.log(
+        `VIZITING node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
+      );
+    } else if (curEvent.state === "visited") {
+      console.log(
+        `VIZITED node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
+      );
+    }
+    setCurEventIndex((i) => (i + 1) % sampleEvents.length);
   };
 
   const handleStepBack = () => setStep((s) => Math.max(0, s - 1));
@@ -54,13 +73,13 @@ export default function App() {
           ▶ Run Algorithm
         </button>
         <button className="btn-secondary" onClick={handleStepBack}>
-          ◀ Step Back
+          <BsFillRewindFill /> Step Back
         </button>
         <button className="btn-secondary" onClick={handleStepForward}>
-          Step Forward ▶▶
+          Step Forward <BsFastForwardFill />
         </button>
         <button className="btn-secondary" onClick={handleReset}>
-          ↻ Reset
+          <BsArrowCounterclockwise /> Reset
         </button>
         <button
           className="btn-theme-toggle"
