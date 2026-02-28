@@ -23,7 +23,7 @@ export default function App() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
   const [step, setStep] = useState(0);
-  const [totalSteps] = useState(12);
+  const [totalSteps] = useState(sampleEvents.length - 1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [visited, setVisited] = useState<string[]>([]);
   const [isDark, setIsDark] = useState(true);
@@ -53,6 +53,7 @@ export default function App() {
         `VIZITED node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
       );
     }
+    setStep((s) => curEventIndex);
     setCurEventIndex((i) => (i + 1) % sampleEvents.length);
   };
 

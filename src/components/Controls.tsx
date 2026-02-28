@@ -28,7 +28,14 @@ export default function Controls({
 }: ControlsProps) {
   return (
     <div className="replay-bar">
-      <div className="step-info">
+      <div
+        className="step-info"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         Step {step} / {totalSteps}
       </div>
       <input
