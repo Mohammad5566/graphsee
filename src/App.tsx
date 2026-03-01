@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, use } from "react";
 import { applyNodeChanges, applyEdgeChanges } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import "./App.css";
@@ -38,6 +38,7 @@ export default function App() {
     [],
   );
 
+  // updates current step in events list
   const handleRun = () => {
     setStep(0);
     setVisited([]);
@@ -56,6 +57,22 @@ export default function App() {
     setStep((s) => curEventIndex);
     setCurEventIndex((i) => (i + 1) % sampleEvents.length);
   };
+
+  useEffect(() => {
+    const curEvent = sampleEvents[curEventIndex];
+    if (curEvent.state === "visiting") {
+      // cur visiting is blue node
+      setNodes((nds) =>
+        nds.map((node) => {
+          if (node.id == curEvent.node) {
+            console.log(`updating node ${node.id} to visiting`);
+            return { ...node, data: { ...node.data, state: curEvent.state } };
+          }
+          return node;
+        }),
+      );
+    }
+  }, [sampleEvents]);
 
   const handleStepBack = () => setStep((s) => Math.max(0, s - 1));
   const handleStepForward = () => setStep((s) => Math.min(totalSteps, s + 1));
