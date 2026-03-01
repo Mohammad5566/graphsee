@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, use } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { applyNodeChanges, applyEdgeChanges } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import "./App.css";
@@ -6,9 +6,6 @@ import {
   BsFillMoonStarsFill,
   BsFillSunFill,
   BsFillPlayFill,
-  BsFastForwardFill,
-  BsFillRewindFill,
-  BsArrowCounterclockwise,
 } from "react-icons/bs";
 import Editor from "./components/Editor.tsx";
 import Controls from "./components/Controls.tsx";
@@ -72,7 +69,7 @@ export default function App() {
         }),
       );
     }
-  }, [sampleEvents]);
+  }, [curEventIndex]);
 
   const handleStepBack = () => setStep((s) => Math.max(0, s - 1));
   const handleStepForward = () => setStep((s) => Math.min(totalSteps, s + 1));
