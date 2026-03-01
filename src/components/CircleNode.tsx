@@ -1,8 +1,15 @@
 // circle node component for react flow graph nodes
 import { Handle, Position } from "@xyflow/react";
-import { useCallback } from "react";
+
+const stateColors: Record<string, string> = {
+  visiting: "#facc15",
+  visited: "#22c55e",
+  default: "var(--node-bg, white)",
+};
 
 export default function CircleNode({ data }: any) {
+  const bgColor = stateColors[data.state ?? "default"];
+
   return (
     <div
       style={{
@@ -10,7 +17,7 @@ export default function CircleNode({ data }: any) {
         height: 50,
         borderRadius: "50%",
         border: "2px solid var(--node-border)",
-        background: "var(--node-bg, white)",
+        background: bgColor,
         color: "var(--node-text, #333)",
         display: "flex",
         alignItems: "center",
