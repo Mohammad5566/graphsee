@@ -6,7 +6,11 @@
 
 #### Core Value Proposition
 
-- What makes this different from existing visualizers: - Users write their own code (any style: recursion/iterative, adj list/matrix, etc.) - Minimal instrumentation (2-3 function calls) instead of rigid API - Generic event model supports any graph algorithm (BFS, DFS, Dijkstra, topo, even obscure ones) - Interactive graph with drag/pan/zoom + timeline replay controls
+- What makes this different from existing visualizers:
+  - Users write their own code (their own style: recursive, iterative, etc)
+  - Minimal instrumentationinstead of rigid API (user has to include just 3 functions)
+  - Generic events abstraction supports any graph algorithm (BFS, DFS, Dijkstra, Topo, etc)
+  - Interactive graph with drag/pan/zoom + timeline replay controls
 
 ---
 
