@@ -16,6 +16,13 @@ import { sampleEvents } from "./util/sampleEvents.ts";
 const initialNodes = generateGraph.nodes;
 const initialEdges = generateGraph.edges;
 
+const getSystemTheme = () => {
+  // Check if the dark mode media query matches
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? true
+    : false;
+};
+
 export default function App() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
@@ -23,7 +30,7 @@ export default function App() {
   const [totalSteps] = useState(sampleEvents.length - 1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [visited, setVisited] = useState<string[]>([]);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(getSystemTheme());
   const [curEventIndex, setCurEventIndex] = useState(0);
 
   const onNodesChange = useCallback(
@@ -34,7 +41,6 @@ export default function App() {
     (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     [],
   );
-
   // updates current step in events list
   const handleRun = () => {
     setStep(0);
