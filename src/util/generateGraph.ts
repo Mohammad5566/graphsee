@@ -124,6 +124,16 @@ const edges: Edge[] = [
       height: 15,
     },
   },
+  {
+    id: "e2-3",
+    source: "2",
+    target: "3",
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+      width: 15,
+      height: 15,
+    },
+  },
 ];
 
 export const generateGraph: Graph = {

@@ -28,5 +28,49 @@ export const sampleEvents: Event[] = [
     edge: { from: "2", to: "4" },
   },
   { state: "visited", node: "4", timestamp: 5, lineNumber: 6 },
-  // visiting node
+  // visiting node 5 from node 4
+  {
+    state: "visiting",
+    node: "5",
+    timestamp: 6,
+    lineNumber: 7,
+    edge: { from: "4", to: "5" },
+  },
+  { state: "visited", node: "5", timestamp: 7, lineNumber: 8 },
+  // visiting node 7 from node 5
+  {
+    state: "visiting",
+    node: "7",
+    timestamp: 8,
+    lineNumber: 9,
+    edge: { from: "5", to: "7" },
+  },
+  { state: "visited", node: "7", timestamp: 9, lineNumber: 10 },
+  // visiting node 8 from node 7
+  {
+    state: "visiting",
+    node: "8",
+    timestamp: 10,
+    lineNumber: 11,
+    edge: { from: "7", to: "8" },
+  },
+  { state: "visited", node: "8", timestamp: 11, lineNumber: 12 },
+  // backtracking to node 2 and visiting node 3
+  {
+    state: "visiting",
+    node: "3",
+    timestamp: 12,
+    lineNumber: 13,
+    edge: { from: "2", to: "3" },
+  },
+  { state: "visited", node: "3", timestamp: 13, lineNumber: 14 },
+  // visiting node 6 from node 3
+  {
+    state: "visiting",
+    node: "6",
+    timestamp: 14,
+    lineNumber: 15,
+    edge: { from: "3", to: "6" },
+  },
+  { state: "visited", node: "6", timestamp: 15, lineNumber: 16 },
 ];
