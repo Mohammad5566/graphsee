@@ -1,5 +1,6 @@
-import { AnyActionArg, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
+import "../App.css";
 
 const DEFAULT_CODE = `def dfs(node, visited):
     if not node: return
@@ -37,6 +38,7 @@ export default function EditorComponent({
     decorationsRef.current = editor.createDecorationsCollection([]);
   }, []);
 
+  // update line highlight in editor based on current line number
   useEffect(() => {
     if (lineNumber > 0 && decorationsRef.current && monacoRef.current) {
       decorationsRef.current.set([
@@ -44,17 +46,17 @@ export default function EditorComponent({
           range: new monacoRef.current.Range(lineNumber, 1, lineNumber, 1),
           options: {
             isWholeLine: true,
-            className: isDark ? "line-highlight" : "line-highlight",
+            className: isDark ? "line-highlight-dark" : "line-highlight-light",
           },
         },
       ]);
     } else {
-      decorationsRef.current?.set([]); // Clear highlight
+      decorationsRef.current?.set([]); // clear highlight
     }
   }, [lineNumber, isDark]);
 
   return (
-    <>
+    <div style={{ width: "100%", height: "100%" }}>
       <Editor
         width="100%"
         height="100%"
@@ -72,11 +74,6 @@ export default function EditorComponent({
           padding: { top: 12 },
         }}
       />
-      <style>{`
-        .line-highlight {
-          background: rgba(34, 237, 61, 0.5);
-        }
-      `}</style>
-    </>
+    </div>
   );
 }

@@ -9,8 +9,8 @@
   --text-primary: #cdd6f4;
   --text-muted: #a6adc8;
   --text-accent: #fab387;
-  --btn-run-bg: #a6e3a1;
-  --btn-run-bg-hover: #94e098;
+  --btn-run-bg: #77eb6d;
+  --btn-run-bg-hover: #97fc9c;
   --btn-run-text: #1e1e2e;
   --slider-track: #45475a;
   --slider-thumb: #89b4fa;
@@ -21,6 +21,7 @@
   --node-border: #b9bbc1;
   --node-text: #cdd6f4;
   --edge-stroke: #a6adc8;
+  --line-highlight-dark: #125816;
 }
 
 .app.light {
@@ -33,8 +34,8 @@
   --text-primary: #4c4f69;
   --text-muted: #6c6f85;
   --text-accent: #e64553;
-  --btn-run-bg: #40a02b;
-  --btn-run-bg-hover: #369922;
+  --btn-run-bg: #53b53d;
+  --btn-run-bg-hover: #72d65e;
   --btn-run-text: #ffffff;
   --slider-track: #ccd0da;
   --slider-thumb: #1e66f5;
@@ -45,6 +46,7 @@
   --node-border: #747579;
   --node-text: #4c4f69;
   --edge-stroke: #6c6f85;
+  --line-highlight-light: #1ec43d4d;
 }
 
 /* ── Layout ── */
@@ -128,6 +130,19 @@
 }
 .btn-theme-toggle:hover {
   background: var(--bg-btn-secondary-hover);
+}
+
+.editor-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.line-highlight-light {
+  background: var(--line-highlight-light) !important;
+}
+
+.line-highlight-dark {
+  background: var(--line-highlight-dark) !important;
 }
 
 /* ── Main content area ── */
