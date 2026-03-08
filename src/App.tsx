@@ -108,9 +108,10 @@ export default function App() {
 
   // update the current line number in editor based on current event
   useEffect(() => {
+    console.log("Current lineNumber index:", curLineNumber);
     const event = sampleEvents[curEventIndex];
     setCurLineNumber(event?.lineNumber ?? -1);
-  }, [curEventIndex]);
+  }, [curEventIndex, Editor]);
 
   // reset button sets slider index to 0 and stops playing
   const handleReset = () => {
