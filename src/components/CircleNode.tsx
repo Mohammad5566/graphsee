@@ -2,8 +2,8 @@
 import { Handle, Position } from "@xyflow/react";
 
 const stateColors: Record<string, string> = {
-  visiting: "#facc15",
-  visited: "#22c55e",
+  visiting: "#a4c6dbff",
+  visited: "#15ed0eff",
   default: "var(--node-bg, white)",
 };
 

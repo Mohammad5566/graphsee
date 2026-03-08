@@ -10,7 +10,7 @@ import {
 import Editor from "./components/Editor.tsx";
 import Controls from "./components/Controls.tsx";
 import GraphView from "./components/GraphView.tsx";
-import { generateGraph } from "./util/graphGenerator.ts";
+import { generateGraph } from "./util/generateGraph.ts";
 import { sampleEvents } from "./util/sampleEvents.ts";
 
 const initialNodes = generateGraph.nodes;
@@ -57,7 +57,7 @@ export default function App() {
         `VIZITED node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
       );
     }
-    setStep((s) => curEventIndex);
+    setStep(() => curEventIndex);
     setCurEventIndex((i) => (i + 1) % sampleEvents.length);
   };
 
