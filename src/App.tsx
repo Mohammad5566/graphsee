@@ -62,20 +62,19 @@ export default function App() {
   };
 
   useEffect(() => {
-    // everytime, start with fresh nodes list
-    setNodes(initialNodes);
+    // everytime, start with fresh nodes list, and modify that
+    let newNodes = initialNodes;
     const events = sampleEvents.slice(0, curEventIndex + 1);
     for (const e of events) {
-      setNodes((nds) =>
-        nds.map((node) => {
-          // update state
-          if (node.id == e.node) {
-            return { ...node, data: { ...node.data, state: e.state } };
-          }
-          return node;
-        }),
-      );
+      newNodes = newNodes.map((node) => {
+        // update state
+        if (node.id == e.node) {
+          return { ...node, data: { ...node.data, state: e.state } };
+        }
+        return node;
+      });
     }
+    setNodes(newNodes); // updated nodes state
   }, [curEventIndex]);
 
   const handleStepBack = () => setCurEventIndex((i) => Math.max(0, i - 1));
