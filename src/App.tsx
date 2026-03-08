@@ -62,12 +62,14 @@ export default function App() {
   };
 
   useEffect(() => {
+    // everytime, start with fresh nodes list
+    setNodes(initialNodes);
     const events = sampleEvents.slice(0, curEventIndex + 1);
     for (const e of events) {
       setNodes((nds) =>
         nds.map((node) => {
+          // update state
           if (node.id == e.node) {
-            console.log(`updating node ${node.id} to ${e.state}`);
             return { ...node, data: { ...node.data, state: e.state } };
           }
           return node;
