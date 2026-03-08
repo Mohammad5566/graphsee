@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Editor from "@monaco-editor/react";
 
 const DEFAULT_CODE = `def dfs(node, visited):
@@ -16,9 +16,10 @@ interface EditorComponentProps {
 
 export default function EditorComponent({
   onCodeChange,
-  isDark = true,
+  isDark,
 }: EditorComponentProps) {
   const [code, setCode] = useState(DEFAULT_CODE);
+  const decorationsRef = useRef<any>(null);
 
   const handleEditorChange = (value: string | undefined) => {
     const newCode = value ?? "";
@@ -26,27 +27,43 @@ export default function EditorComponent({
     onCodeChange?.(newCode);
   };
 
-  const handleEditorMount = (editor: any) => {
+  const handleEditorMount = (editor: any, monaco: any) => {
     editor.focus();
+    decorationsRef.current = editor.createDecorationsCollection([
+      {
+        range: new monaco.Range(3, 1, 3, 1),
+        options: {
+          isWholeLine: true,
+          className: "line-highlight",
+        },
+      },
+    ]);
   };
 
   return (
-    <Editor
-      width="100%"
-      height="100%"
-      language="python"
-      theme={isDark ? "vs-dark" : "light"}
-      value={code}
-      onChange={handleEditorChange}
-      onMount={handleEditorMount}
-      options={{
-        selectOnLineNumbers: true,
-        fontSize: 16,
-        minimap: { enabled: false },
-        scrollBeyondLastLine: false,
-        lineNumbers: "on",
-        padding: { top: 12 },
-      }}
-    />
+    <>
+      <Editor
+        width="100%"
+        height="100%"
+        language="python"
+        theme={isDark ? "vs-dark" : "light"}
+        value={code}
+        onChange={handleEditorChange}
+        onMount={handleEditorMount}
+        options={{
+          selectOnLineNumbers: true,
+          fontSize: 16,
+          minimap: { enabled: false },
+          scrollBeyondLastLine: false,
+          lineNumbers: "on",
+          padding: { top: 12 },
+        }}
+      />
+      <style>{`
+        .line-highlight {
+          background: rgba(255, 215, 0, 0.25);
+        }
+      `}</style>
+    </>
   );
 }

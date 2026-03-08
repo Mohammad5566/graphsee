@@ -161,7 +161,8 @@ export default function App() {
       </div>
 
       {/* ── Bottom replay controls ── */}
-      {runAlgoClicked && ( // only show controls after user clicks "Run Algorithm" once
+      {
+        //{runAlgoClicked && ( // only show controls after user clicks "Run Algorithm" once
         <Controls
           step={curEventIndex}
           totalSteps={totalSteps}
@@ -170,7 +171,8 @@ export default function App() {
           onReset={handleReset}
           onSeek={handleSeek}
         />
-      )}
+        //)}
+      }
     </div>
   );
 }
