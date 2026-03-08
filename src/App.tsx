@@ -48,6 +48,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    console.log("isPlaying", isPlaying);
     if (!isPlaying) return;
     // when is playing, keep increasing the event index every second until we reach the end
     const intervalId = setInterval(() => {
@@ -65,7 +66,6 @@ export default function App() {
   }, [isPlaying]);
 
   useEffect(() => {
-    setIsPlaying(false); // pause when user manually changes step
     // everytime, start with fresh nodes list, and modify that
     let newNodes = initialNodes;
     const events = sampleEvents.slice(0, curEventIndex + 1);
@@ -81,9 +81,16 @@ export default function App() {
     setNodes(newNodes); // new nodes list with updated states
   }, [curEventIndex]);
 
-  const handleStepBack = () => setCurEventIndex((i) => Math.max(0, i - 1));
+  const handleStepBack = () =>
+    setCurEventIndex((i) => {
+      setIsPlaying(false); // pause when user manually changes step, if it was playing
+      return Math.max(0, i - 1);
+    });
   const handleStepForward = () =>
-    setCurEventIndex((i) => Math.min(totalSteps, i + 1));
+    setCurEventIndex((i) => {
+      setIsPlaying(false); // pause when user manually changes step, if it was playing
+      return Math.min(totalSteps, i + 1);
+    });
 
   const handleReset = () => {
     setCurEventIndex(0);
