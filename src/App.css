@@ -65,7 +65,9 @@
 .toolbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  position: relative;
+  gap: 16px;
   padding: 8px 16px;
   background: var(--bg-toolbar);
   border-bottom: 1px solid var(--border);
@@ -112,7 +114,8 @@
 
 /* ── Theme toggle ── */
 .btn-theme-toggle {
-  margin-left: auto;
+  position: absolute;
+  right: 16px;
   background: var(--toggle-bg);
   color: var(--toggle-fg);
   border: none;
