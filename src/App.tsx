@@ -92,12 +92,17 @@ export default function App() {
       return Math.min(totalSteps, i + 1);
     });
 
+  // reset button sets slider index to 0 and stops playing
   const handleReset = () => {
-    setCurEventIndex(0);
     setIsPlaying(false);
+    setCurEventIndex(0);
   };
 
-  const handleSeek = (s: number) => setCurEventIndex(s);
+  // go to that index in the list of events
+  const handleSeek = (s: number) => {
+    setIsPlaying(false);
+    setCurEventIndex(s);
+  };
 
   return (
     <div className={`app${isDark ? "" : " light"}`}>
