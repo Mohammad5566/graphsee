@@ -4,13 +4,12 @@
 
 #### Goal: Build a web-based tool that lets users write their own graph algorithm code (Python) and visualize execution step-by-step through an interactive graph display.
 
-#### Core Value Proposition
+#### What seperates this from all the other graph visualizers?
 
-- What makes this different from existing visualizers:
-  - Users write their own code (their own style: recursive, iterative, etc)
-  - Minimal instrumentationinstead of rigid API (user has to include just 3 functions)
-  - Generic events abstraction supports any graph algorithm (BFS, DFS, Dijkstra, Topo, etc)
-  - Interactive graph with drag/pan/zoom + timeline replay controls
+- Users write their own code (their own style: recursive, iterative, etc)
+- Minimal instrumentationinstead of rigid API (user has to include just 3 functions)
+- Generic events abstraction supports any graph algorithm (BFS, DFS, Dijkstra, Topo, etc)
+- Interactive graph with drag/pan/zoom + timeline replay controls
 
 ---
 
@@ -18,7 +17,7 @@
 
 ##### Frontend
 
-- React + TypeScript + Vite
+- React + TypeScript
 - React Flow - interactive node/edge visualization with drag/pan/zoom
 - Monaco Editor - VS Code-quality code editor in browser
 - Pyodide - run Python in browser (maybe use backend instead)
