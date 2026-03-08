@@ -29,7 +29,8 @@ export default function App() {
   const [totalSteps] = useState(sampleEvents.length - 1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDark, setIsDark] = useState(getSystemTheme());
-  const [curEventIndex, setCurEventIndex] = useState(0);
+  const [curEventIndex, setCurEventIndex] = useState(-1);
+  const [runAlgoClicked, setRunAlgoClicked] = useState(false);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -42,6 +43,7 @@ export default function App() {
 
   // start the algo, clear everything
   const handleRun = () => {
+    setRunAlgoClicked(true);
     setNodes(initialNodes);
     setCurEventIndex(0);
     setIsPlaying(true);
@@ -68,6 +70,11 @@ export default function App() {
   useEffect(() => {
     // everytime, start with fresh nodes list, and modify that
     let newNodes = initialNodes;
+    if (curEventIndex < 0) {
+      setNodes(newNodes);
+      return; // no event to show
+    }
+
     const events = sampleEvents.slice(0, curEventIndex + 1);
     for (const e of events) {
       newNodes = newNodes.map((node) => {
@@ -154,14 +161,16 @@ export default function App() {
       </div>
 
       {/* ── Bottom replay controls ── */}
-      <Controls
-        step={curEventIndex}
-        totalSteps={totalSteps}
-        onStepBack={handleStepBack}
-        onStepForward={handleStepForward}
-        onReset={handleReset}
-        onSeek={handleSeek}
-      />
+      {runAlgoClicked && ( // only show controls after user clicks "Run Algorithm" once
+        <Controls
+          step={curEventIndex}
+          totalSteps={totalSteps}
+          onStepBack={handleStepBack}
+          onStepForward={handleStepForward}
+          onReset={handleReset}
+          onSeek={handleSeek}
+        />
+      )}
     </div>
   );
 }

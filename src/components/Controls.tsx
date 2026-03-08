@@ -30,7 +30,7 @@ export default function Controls({
           justifyContent: "center",
         }}
       >
-        Step {step} / {totalSteps}
+        Step {step >= 0 ? step : 0} / {totalSteps}
       </div>
       <input
         type="range"
