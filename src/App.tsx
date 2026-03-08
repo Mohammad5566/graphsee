@@ -26,10 +26,8 @@ const getSystemTheme = () => {
 export default function App() {
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
-  const [step, setStep] = useState(0);
   const [totalSteps] = useState(sampleEvents.length - 1);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [visited, setVisited] = useState<string[]>([]);
   const [isDark, setIsDark] = useState(getSystemTheme());
   const [curEventIndex, setCurEventIndex] = useState(0);
 
@@ -41,10 +39,9 @@ export default function App() {
     (changes: any) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     [],
   );
+
   // updates current step in events list
-  const handleRun = () => {
-    setStep(0);
-    setVisited([]);
+  const handleRun = (direction: string) => {
     // TODO: execute algorithm and collect events
     const curEvent = sampleEvents[curEventIndex];
     // update nodes/edges based on event
@@ -57,19 +54,21 @@ export default function App() {
         `VIZITED node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
       );
     }
-    setStep(() => curEventIndex);
-    setCurEventIndex((i) => (i + 1) % sampleEvents.length);
+    setCurEventIndex(() => curEventIndex);
+    const dir = direction === "forward" ? 1 : -1;
+    setCurEventIndex(
+      (i) => (i + dir + sampleEvents.length) % sampleEvents.length,
+    );
   };
 
   useEffect(() => {
-    const curEvent = sampleEvents[curEventIndex];
-    if (curEvent.state === "visiting") {
-      // cur visiting is blue node
+    const events = sampleEvents.slice(0, curEventIndex + 1);
+    for (const e of events) {
       setNodes((nds) =>
         nds.map((node) => {
-          if (node.id == curEvent.node) {
-            console.log(`updating node ${node.id} to visiting`);
-            return { ...node, data: { ...node.data, state: curEvent.state } };
+          if (node.id == e.node) {
+            console.log(`updating node ${node.id} to ${e.state}`);
+            return { ...node, data: { ...node.data, state: e.state } };
           }
           return node;
         }),
@@ -77,21 +76,23 @@ export default function App() {
     }
   }, [curEventIndex]);
 
-  const handleStepBack = () => setStep((s) => Math.max(0, s - 1));
-  const handleStepForward = () => setStep((s) => Math.min(totalSteps, s + 1));
+  const handleStepBack = () => setCurEventIndex((i) => Math.max(0, i - 1));
+  const handleStepForward = () =>
+    setCurEventIndex((i) => Math.min(totalSteps, i + 1));
+
   const handleReset = () => {
-    setStep(0);
+    setCurEventIndex(0);
     setIsPlaying(false);
-    setVisited([]);
   };
+
   const handlePlayPause = () => setIsPlaying((p) => !p);
-  const handleSeek = (s: number) => setStep(s);
+  const handleSeek = (s: number) => setCurEventIndex(s);
 
   return (
     <div className={`app${isDark ? "" : " light"}`}>
       {/* ── Top toolbar ── */}
       <div className="toolbar">
-        <button className="btn-run" onClick={handleRun}>
+        <button className="btn-run" onClick={() => handleRun("forward")}>
           Run Algorithm <BsFillPlayFill />
         </button>
         <button
@@ -119,7 +120,7 @@ export default function App() {
             <div>
               Visited:{" "}
               <span className="var-value">
-                {visited.length > 0 ? `{${visited.join(", ")}}` : "{}"}
+                {/*visited.length > 0 ? `{${visited.join(", ")}}` : "{}"}*/}
               </span>
             </div>
           </div>
@@ -138,12 +139,12 @@ export default function App() {
 
       {/* ── Bottom replay controls ── */}
       <Controls
-        step={step}
+        step={curEventIndex}
         totalSteps={totalSteps}
         isPlaying={isPlaying}
-        onRun={handleRun}
-        onStepBack={handleRun}
-        onStepForward={handleRun}
+        onRun={() => handleRun("forward")}
+        onStepBack={() => handleStepBack()}
+        onStepForward={() => handleStepForward()}
         onReset={handleReset}
         onPlayPause={handlePlayPause}
         onSeek={handleSeek}
