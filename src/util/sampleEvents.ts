@@ -28,4 +28,5 @@ export const sampleEvents: Event[] = [
     edge: { from: "2", to: "4" },
   },
   { state: "visited", node: "4", timestamp: 5, lineNumber: 6 },
+  // visiting node
 ];

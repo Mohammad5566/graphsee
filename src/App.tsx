@@ -40,26 +40,28 @@ export default function App() {
     [],
   );
 
-  // updates current step in events list
-  const handleRun = (direction: string) => {
-    // TODO: execute algorithm and collect events
-    const curEvent = sampleEvents[curEventIndex];
-    // update nodes/edges based on event
-    if (curEvent.state === "visiting") {
-      console.log(
-        `VIZITING node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
-      );
-    } else if (curEvent.state === "visited") {
-      console.log(
-        `VIZITED node ${curEvent.node} at line ${curEvent.lineNumber} at timestamp ${curEvent.timestamp}`,
-      );
-    }
-    setCurEventIndex(() => curEventIndex);
-    const dir = direction === "forward" ? 1 : -1;
-    setCurEventIndex(
-      (i) => (i + dir + sampleEvents.length) % sampleEvents.length,
-    );
+  // start the algo, clear everything
+  const handleRun = () => {
+    setNodes(initialNodes);
+    setCurEventIndex(0);
+    setIsPlaying(true);
   };
+
+  useEffect(() => {
+    // when is playing, keep increasing the event index every second until we reach the end
+    const intervalId = setInterval(() => {
+      setCurEventIndex((i) => {
+        if (i >= totalSteps) {
+          clearInterval(intervalId);
+          setIsPlaying(false); // stop at the end
+          return i;
+        }
+        return i + 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [isPlaying]);
 
   useEffect(() => {
     // everytime, start with fresh nodes list, and modify that
@@ -74,7 +76,7 @@ export default function App() {
         return node;
       });
     }
-    setNodes(newNodes); // updated nodes state
+    setNodes(newNodes); // new nodes list with updated states
   }, [curEventIndex]);
 
   const handleStepBack = () => setCurEventIndex((i) => Math.max(0, i - 1));
@@ -86,14 +88,13 @@ export default function App() {
     setIsPlaying(false);
   };
 
-  const handlePlayPause = () => setIsPlaying((p) => !p);
   const handleSeek = (s: number) => setCurEventIndex(s);
 
   return (
     <div className={`app${isDark ? "" : " light"}`}>
       {/* ── Top toolbar ── */}
       <div className="toolbar">
-        <button className="btn-run" onClick={() => handleRun("forward")}>
+        <button className="btn-run" onClick={handleRun}>
           Run Algorithm <BsFillPlayFill />
         </button>
         <button
@@ -142,12 +143,9 @@ export default function App() {
       <Controls
         step={curEventIndex}
         totalSteps={totalSteps}
-        isPlaying={isPlaying}
-        onRun={() => handleRun("forward")}
-        onStepBack={() => handleStepBack()}
-        onStepForward={() => handleStepForward()}
+        onStepBack={handleStepBack}
+        onStepForward={handleStepForward}
         onReset={handleReset}
-        onPlayPause={handlePlayPause}
         onSeek={handleSeek}
       />
     </div>

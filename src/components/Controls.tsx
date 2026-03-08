@@ -6,24 +6,18 @@ import {
 interface ControlsProps {
   step: number;
   totalSteps: number;
-  isPlaying: boolean;
-  onRun: () => void;
   onStepBack: () => void;
   onStepForward: () => void;
   onReset: () => void;
-  onPlayPause: () => void;
   onSeek: (step: number) => void;
 }
 
 export default function Controls({
   step,
   totalSteps,
-  isPlaying,
-  onRun,
   onStepBack,
   onStepForward,
   onReset,
-  onPlayPause,
   onSeek,
 }: ControlsProps) {
   return (
