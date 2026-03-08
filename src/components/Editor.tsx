@@ -11,11 +11,13 @@ const DEFAULT_CODE = `def dfs(node, visited):
 
 interface EditorComponentProps {
   onCodeChange?: (code: string) => void;
+  lineNumber: number;
   isDark?: boolean;
 }
 
 export default function EditorComponent({
   onCodeChange,
+  lineNumber,
   isDark,
 }: EditorComponentProps) {
   const [code, setCode] = useState(DEFAULT_CODE);
@@ -31,7 +33,7 @@ export default function EditorComponent({
     editor.focus();
     decorationsRef.current = editor.createDecorationsCollection([
       {
-        range: new monaco.Range(3, 1, 3, 1),
+        range: new monaco.Range(lineNumber, 1, lineNumber, 1),
         options: {
           isWholeLine: true,
           className: "line-highlight",
