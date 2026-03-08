@@ -6,6 +6,7 @@ import {
   BsFillMoonStarsFill,
   BsFillSunFill,
   BsFillPlayFill,
+  BsFillPauseFill,
 } from "react-icons/bs";
 import Editor from "./components/Editor.tsx";
 import Controls from "./components/Controls.tsx";
@@ -31,6 +32,7 @@ export default function App() {
   const [isDark, setIsDark] = useState(getSystemTheme());
   const [curEventIndex, setCurEventIndex] = useState(-1);
   const [runAlgoClicked, setRunAlgoClicked] = useState(false);
+  const [curLineNumber, setCurLineNumber] = useState(-1);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -43,6 +45,12 @@ export default function App() {
 
   // start the algo, clear everything
   const handleRun = () => {
+    if (isPlaying) {
+      setIsPlaying(false); // if already playing, stop and reset
+      setCurEventIndex(-1);
+      setNodes(initialNodes);
+      return;
+    }
     setRunAlgoClicked(true);
     setNodes(initialNodes);
     setCurEventIndex(0);
@@ -50,7 +58,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    console.log("isPlaying", isPlaying);
     if (!isPlaying) return;
     // when is playing, keep increasing the event index every second until we reach the end
     const intervalId = setInterval(() => {
@@ -99,6 +106,12 @@ export default function App() {
       return Math.min(totalSteps, i + 1);
     });
 
+  // update the current line number in editor based on current event
+  useEffect(() => {
+    const event = sampleEvents[curEventIndex];
+    setCurLineNumber(event?.lineNumber ?? -1);
+  }, [curEventIndex]);
+
   // reset button sets slider index to 0 and stops playing
   const handleReset = () => {
     setIsPlaying(false);
@@ -116,7 +129,7 @@ export default function App() {
       {/* ── Top toolbar ── */}
       <div className="toolbar">
         <button className="btn-run" onClick={handleRun}>
-          Run Algorithm <BsFillPlayFill />
+          Run Algorithm {isPlaying ? <BsFillPauseFill /> : <BsFillPlayFill />}
         </button>
         <button
           className="btn-theme-toggle"
@@ -136,7 +149,7 @@ export default function App() {
         {/* Left: code editor + variables */}
         <div className="left-panel">
           <div className="editor-wrapper">
-            <Editor isDark={isDark} />
+            <Editor isDark={isDark} lineNumber={curLineNumber} />
           </div>
           <div className="variables-panel">
             <h3>Variables:</h3>
