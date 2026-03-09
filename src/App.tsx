@@ -13,6 +13,8 @@ import Controls from "./components/Controls.tsx";
 import GraphView from "./components/GraphView.tsx";
 import { generateGraph } from "./util/generateGraph.ts";
 import { sampleEvents } from "./util/sampleEvents.ts";
+import { pyodide } from "./util/python/pyodide.js";
+import { loadPyodide } from "pyodide";
 
 const initialNodes = generateGraph.nodes;
 const initialEdges = generateGraph.edges;
@@ -33,6 +35,7 @@ export default function App() {
   const [curEventIndex, setCurEventIndex] = useState(-1);
   const [runAlgoClicked, setRunAlgoClicked] = useState(false);
   const [curLineNumber, setCurLineNumber] = useState(-1);
+  const [pyodide, setPyodide] = useState<any>(null);
 
   const onNodesChange = useCallback(
     (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -44,7 +47,20 @@ export default function App() {
   );
 
   // start the algo, clear everything
-  const handleRun = () => {
+  const handleRun = async () => {
+    if (!pyodide)
+      setPyodide(
+        await loadPyodide({
+          indexURL: "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/",
+        }),
+      );
+    console.log(
+      pyodide.runPython(`
+    import sys
+    sys.version
+  `),
+    );
+
     if (isPlaying) {
       setIsPlaying(false); // if already playing, stop and reset
       setCurEventIndex(-1);
@@ -124,6 +140,11 @@ export default function App() {
     setIsPlaying(false);
     setCurEventIndex(s);
   };
+
+  async function runUserCode(code: string) {
+    const py = await pyodide();
+    await py.runPythonAsync(code);
+  }
 
   return (
     <div className={`app${isDark ? "" : " light"}`}>
